@@ -1,0 +1,10 @@
+{
+  "seed": 20260846,
+  "n": 256,
+  "alpha": 8,
+  "condition_number": 100000000,
+  "rho": 0.001,
+  "lambda": 1e-06,
+  "csv": "D:\\WHU\\\u8bfe\u7a0b\\\u5927\u4e00\u4e0b\\\u5de5\u79d1\u9ad8\u7b49\u4ee3\u6570\uff08\u4e8c\uff09\\\u671f\u4e2d\u5c0f\u7ec4\u5b9e\u9a8c\\results\\exp_noise_direction.csv",
+  "figure": "D:\\WHU\\\u8bfe\u7a0b\\\u5927\u4e00\u4e0b\\\u5de5\u79d1\u9ad8\u7b49\u4ee3\u6570\uff08\u4e8c\uff09\\\u671f\u4e2d\u5c0f\u7ec4\u5b9e\u9a8c\\figures\\signal\\fig_noise_direction_svd.png"
+}

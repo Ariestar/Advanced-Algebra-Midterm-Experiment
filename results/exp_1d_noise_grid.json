@@ -1,0 +1,20 @@
+{
+  "seed": 20260513,
+  "n": 256,
+  "lambda": 1e-06,
+  "alphas": [
+    2,
+    4,
+    6,
+    8
+  ],
+  "rhos": [
+    0.0001,
+    0.001,
+    0.01
+  ],
+  "repeats": 20,
+  "csv": "D:\\WHU\\\u8bfe\u7a0b\\\u5927\u4e00\u4e0b\\\u5de5\u79d1\u9ad8\u7b49\u4ee3\u6570\uff08\u4e8c\uff09\\\u671f\u4e2d\u5c0f\u7ec4\u5b9e\u9a8c\\results\\exp_1d_noise_grid.csv",
+  "summary_csv": "D:\\WHU\\\u8bfe\u7a0b\\\u5927\u4e00\u4e0b\\\u5de5\u79d1\u9ad8\u7b49\u4ee3\u6570\uff08\u4e8c\uff09\\\u671f\u4e2d\u5c0f\u7ec4\u5b9e\u9a8c\\results\\exp_1d_noise_grid_summary.csv",
+  "figure": "D:\\WHU\\\u8bfe\u7a0b\\\u5927\u4e00\u4e0b\\\u5de5\u79d1\u9ad8\u7b49\u4ee3\u6570\uff08\u4e8c\uff09\\\u671f\u4e2d\u5c0f\u7ec4\u5b9e\u9a8c\\figures\\signal\\fig_1d_noise_kappa_heatmap.png"
+}

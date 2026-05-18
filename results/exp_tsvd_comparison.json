@@ -1,0 +1,23 @@
+{
+  "seed": 20260957,
+  "n": 256,
+  "alpha": 8,
+  "condition_number": 100000000,
+  "rho": 0.001,
+  "lambda": 1e-06,
+  "ranks": [
+    5,
+    10,
+    20,
+    40,
+    80,
+    128,
+    192,
+    256
+  ],
+  "best_tsvd_rank": 128,
+  "best_tsvd_relative_error": 0.7393028028097112,
+  "tikhonov_relative_error": 0.7703264677940411,
+  "csv": "D:\\WHU\\\u8bfe\u7a0b\\\u5927\u4e00\u4e0b\\\u5de5\u79d1\u9ad8\u7b49\u4ee3\u6570\uff08\u4e8c\uff09\\\u671f\u4e2d\u5c0f\u7ec4\u5b9e\u9a8c\\results\\exp_tsvd_comparison.csv",
+  "figure": "D:\\WHU\\\u8bfe\u7a0b\\\u5927\u4e00\u4e0b\\\u5de5\u79d1\u9ad8\u7b49\u4ee3\u6570\uff08\u4e8c\uff09\\\u671f\u4e2d\u5c0f\u7ec4\u5b9e\u9a8c\\figures\\signal\\fig_tsvd_comparison.png"
+}

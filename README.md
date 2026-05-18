@@ -16,6 +16,9 @@ uv sync
 uv run python -m experiments.exp_filter_factors
 uv run python -m experiments.exp_1d_condition_number
 uv run python -m experiments.exp_1d_lambda_selection
+uv run python -m experiments.exp_noise_direction
+uv run python -m experiments.exp_1d_noise_grid
+uv run python -m experiments.exp_tsvd_comparison
 uv run python -m experiments.exp_2d_image_recovery
 ```
 
