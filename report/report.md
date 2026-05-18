@@ -244,7 +244,7 @@ $$
 
 其中 PSNR 为峰值信噪比，PSNR 越高，代表恢复后的图像和原图在像素数值上越接近，噪声越小。
 
-SSIM为结构相似性，它模拟了人类视觉系统对物体的亮度、对比度和结构信息的敏感度。SSIM 的范围是 0 到 1，越接近 1，说明两张图片的结构越相似，人眼看起来就越觉得它们是同一张图。
+SSIM 为结构相似性指标，用于衡量两幅图像在亮度、对比度和结构信息上的相似程度。SSIM 的取值范围通常为 $[0,1]$，数值越接近 1，表示两幅图像的结构相似性越高。
 
 需要注意的是，PSNR 和 SSIM 用于描述视觉质量，而矩阵范数误差更直接反映线性代数意义下的恢复精度。
 
@@ -276,13 +276,13 @@ $$
 
 绘制以下曲线：
 
-1. 奇异值谱 $\sigma_i$；（图一）
-2. 伪逆放大因子 $1/\sigma_i$；（图二）
-3. Tikhonov 谱放大系数 $\sigma_i/(\sigma_i^2+\lambda)$。（图二）
+1. 奇异值谱 $\sigma_i$；
+2. 伪逆放大因子 $1/\sigma_i$；
+3. Tikhonov 谱放大系数 $\sigma_i/(\sigma_i^2+\lambda)$。
 
-图表路径：
+图 1 给出了奇异值谱、伪逆放大因子以及 Tikhonov 谱放大系数的对比。
 
-![奇异值谱与滤波因子](../figures/theory/fig_filter_factors.png)
+![图 1  奇异值谱与谱放大系数对比](../figures/theory/fig_filter_factors.png)
 
 ### 5.3 结果分析
 
@@ -318,13 +318,13 @@ $$
 
 每组条件数重复 20 次随机噪声实验，并报告平均误差。
 
-图表路径：
+图 2 和图 3 分别展示伪逆方法与 Tikhonov 正则化方法在不同条件数下的误差变化。图 4 给出了 $\kappa(A)=10^8$ 时的一维信号恢复示例。
 
-![伪逆误差随条件数变化](../figures/signal/fig_1d_pinv_error_vs_kappa.png)
+![图 2  伪逆误差随条件数变化](../figures/signal/fig_1d_pinv_error_vs_kappa.png)
 
-![Tikhonov 误差随条件数变化](../figures/signal/fig_1d_tikhonov_error_vs_kappa.png)
+![图 3  Tikhonov 误差随条件数变化](../figures/signal/fig_1d_tikhonov_error_vs_kappa.png)
 
-![一维信号恢复示例](../figures/signal/fig_1d_signal_recovery_kappa_1e8.png)
+![图 4  一维信号恢复示例](../figures/signal/fig_1d_signal_recovery_kappa_1e8.png)
 
 ### 6.3 实验结果
 
@@ -357,9 +357,9 @@ $$
 
 本文补充构造了等范数但方向不同的观测噪声，分别令 $\delta b$ 沿 $u_1$、$u_{n/2}$ 和 $u_n$ 方向，其中 $u_i$ 为矩阵 $A$ 的左奇异向量。实验参数取 $n=256$、$\kappa(A)=10^8$、$\rho=10^{-3}$、$\lambda=10^{-6}$。
 
-图表路径：
+图 5 展示了噪声沿不同左奇异向量方向时，伪逆解与 Tikhonov 正则化解的误差差异。
 
-![不同奇异向量方向噪声的放大效果](../figures/signal/fig_noise_direction_svd.png)
+![图 5  不同奇异向量方向噪声的放大效果](../figures/signal/fig_noise_direction_svd.png)
 
 实验结果如下：
 
@@ -375,9 +375,9 @@ $$
 
 为考察病态程度与噪声强度的共同影响，本文进一步设置 $\rho\in\{10^{-4},10^{-3},10^{-2}\}$，并对 $\kappa(A)\in\{10^2,10^4,10^6,10^8\}$ 的每组参数重复 20 次实验。
 
-图表路径：
+图 6 展示了不同条件数和不同噪声水平下，伪逆误差与 Tikhonov 误差比值的变化。
 
-![条件数与噪声水平对误差比的影响](../figures/signal/fig_1d_noise_kappa_heatmap.png)
+![图 6  条件数与噪声水平对误差比的影响](../figures/signal/fig_1d_noise_kappa_heatmap.png)
 
 下表列出部分代表性结果：
 
@@ -400,9 +400,9 @@ $$
 
 它与 Tikhonov 正则化都属于基于奇异值谱的稳定化方法。二者区别在于：截断 SVD 直接舍弃 $i>k$ 的小奇异值方向，属于硬截断；Tikhonov 正则化通过 $\sigma_i^2/(\sigma_i^2+\lambda)$ 连续降低小奇异值方向的权重，属于连续谱滤波。
 
-图表路径：
+图 7 比较了不同截断秩下的截断 SVD 误差，并给出固定参数 Tikhonov 正则化的误差作为参照。
 
-![截断 SVD 与 Tikhonov 的误差比较](../figures/signal/fig_tsvd_comparison.png)
+![图 7  截断 SVD 与 Tikhonov 的误差比较](../figures/signal/fig_tsvd_comparison.png)
 
 在 $n=256$、$\kappa(A)=10^8$、$\rho=10^{-3}$ 的一次实验中，测试截断秩 $k\in\{5,10,20,40,80,128,192,256\}$。其中当前网格下截断 SVD 的最小相对误差为 0.739303，对应 $k=128$；固定 $\lambda=10^{-6}$ 的 Tikhonov 相对误差为 0.770326。该结果表明，截断 SVD 与 Tikhonov 都能通过削弱小奇异值方向改善稳定性，但参数选择方式分别体现为截断秩 $k$ 与正则化参数 $\lambda$ 的选择。
 
@@ -477,9 +477,9 @@ $$
 \lambda_{\mathrm{oracle}}=\arg\min_\lambda \frac{\|x_\lambda-x\|_2}{\|x\|_2}
 $$
 
-图表路径：
+图 8 展示了正则化参数扫描结果以及对应的 L-curve 曲线。
 
-![正则化参数扫描与 L-curve](../figures/signal/fig_1d_lambda_selection_and_lcurve.png)
+![图 8  正则化参数扫描与 L-curve](../figures/signal/fig_1d_lambda_selection_and_lcurve.png)
 
 ### 7.3 实验结果
 
@@ -499,7 +499,7 @@ $$
 
 当 $\lambda$ 过小时，Tikhonov 正则化接近伪逆求解，小奇异值方向仍会放大噪声，导致恢复误差较大。当 $\lambda$ 过大时，正则化项占据主导，解的范数被过度压制，真实信号成分也被削弱，同样会导致误差增大。因此，$\lambda$ 的选择体现了拟合误差与稳定性之间的折中。
 
-L-curve 方法是在不知道真实信号的情况下估计出最优 $\lambda$ 的方法，它通过同时观察残差范数 $\|Ax_\lambda-\tilde b\|_2$ 和解范数 $\|x_\lambda\|_2$，寻找二者之间的平衡点。横轴是残差范数 $\|Ax_\lambda-\tilde b\|_2$ ，代表解的拟合程度，纵轴是解范数 $\|x_\lambda\|_2$ ，代表解的能量大小，即解向量本身的数值有没有显著增大。左上角的竖直线对应极小的 $\lambda$ ，对应直接通过伪逆求解造成的误差显著增大；右下角的水平线对应极大的 $\lambda$ ，对应由于惩罚太重导致解和观测值拟合程度不足，拟合误差过大。L曲线拐点对应的 $\lambda$ 即为较优 $\lambda$ 参数。虽然本文实验主要报告 oracle 参数，但 L-curve 为真实未知解问题提供了可行的参数选择思路。
+L-curve 方法是在真实解未知时估计正则化参数的一类常用方法。该方法同时考察残差范数 $\|Ax_\lambda-\tilde b\|_2$ 与解范数 $\|x_\lambda\|_2$，并在二者的对数坐标曲线上寻找折中位置。残差范数反映解对观测数据的拟合程度，解范数反映恢复结果的规模。较小的 $\lambda$ 通常对应较小残差和较大解范数，可能保留小奇异值方向的噪声放大；较大的 $\lambda$ 通常对应较大残差和较小解范数，可能过度压制真实信号成分。L-curve 的拐角位置可视为拟合误差与解稳定性之间的折中选择。本文实验主要报告 oracle 参数，用于评估当前实验设置下正则化方法可达到的参考效果；在真实反问题中，由于真实解未知，通常需要结合 L-curve、残差原则或交叉验证等方法选择正则化参数。
 
 ## 8. 实验四：二维图像复原
 
@@ -521,9 +521,9 @@ $$
 \mathrm{vec}(\tilde Y)=(B\otimes B)\mathrm{vec}(X)+\mathrm{vec}(E)
 $$
 
-其中 $\otimes$ 表示 Kronecker 积，即“每个元素乘上整个矩阵”，得到一个分块矩阵。
+其中 $\otimes$ 表示 Kronecker 积。
 
-设有矩阵 $A$（比如 $2\times 2$）和矩阵 $B$（比如 $3\times 3$），那么 $A \otimes B$ 就是一个 $(2\cdot3) \times (2\cdot3) = 6 \times 6$ 的大矩阵，它的每个块都是 $A$ 中对应元素乘以 $B$：
+例如，若 $A\in\mathbb{R}^{2\times2}$、$B\in\mathbb{R}^{3\times3}$，则 $A\otimes B\in\mathbb{R}^{6\times6}$，其分块形式为：
 
 $$
 A \otimes B = \begin{pmatrix}
@@ -562,11 +562,11 @@ $$
 
 相对噪声水平取 $\rho=10^{-3}$。比较伪逆恢复和不同 $\lambda$ 下的 Tikhonov 恢复。
 
-图表路径：
+图 9 展示了二维图像复原的主结果，图 10 比较了不同正则化参数下的图像恢复效果。
 
-![二维图像复原主结果](../figures/image/fig_2d_image_recovery_main.png)
+![图 9  二维图像复原主结果](../figures/image/fig_2d_image_recovery_main.png)
 
-![不同正则化参数下的图像恢复](../figures/image/fig_2d_lambda_grid.png)
+![图 10  不同正则化参数下的图像恢复](../figures/image/fig_2d_lambda_grid.png)
 
 ### 8.4 实验结果
 
@@ -598,7 +598,17 @@ $$
 A^+\delta b = \sum_i \frac{u_i^T\delta b}{\sigma_i}v_i
 $$
 
-因此小奇异值会引发噪声放大。实验中，当条件数从 $10^2$ 增大到 $10^8$ 时，伪逆相对误差从 0.0115 增大到 2741.0088，充分说明病态性会导致显著误差放大。
+该公式表明，小奇异值方向会造成观测扰动在反向求解过程中的放大。实验中，当条件数从 $10^2$ 增大到 $10^8$ 时，伪逆相对误差从 0.0115 增大到 2741.0088，说明病态性会导致显著误差放大。
+
+从扰动理论角度看，对于可逆线性系统 $Ax=b$，若观测右端项存在扰动 $\delta b$，则一阶误差估计可写为：
+
+$$
+\frac{\|\delta x\|_2}{\|x\|_2}
+\lesssim
+\kappa(A)\frac{\|\delta b\|_2}{\|b\|_2}.
+$$
+
+该估计说明，条件数 $\kappa(A)$ 控制了右端项相对扰动向解向量相对误差传播时可能产生的放大程度。本文一维条件数实验和条件数—噪声水平网格实验均与该理论判断一致：在噪声水平固定时，增大 $\kappa(A)$ 会显著提高伪逆求解的误差；在高条件数情形下，增大噪声水平会进一步放大伪逆解的不稳定性。
 
 Tikhonov 正则化的谱滤波因子为：
 
@@ -608,9 +618,21 @@ $$
 
 该因子抑制了小奇异值方向上的放大。实验中，在高条件数情况下 Tikhonov 恢复误差远低于伪逆误差，说明正则化确实提高了求解稳定性。
 
-### 9.2 正则化的代价
+### 9.2 正则化的偏差—稳定性折中
 
-Tikhonov 正则化并不是无条件提高精度的方法。它通过抑制小奇异值方向来降低噪声放大，但这些方向中也可能包含真实信号成分。因此，正则化会引入偏差。若 $\lambda$ 过大，真实信号也会被过度压制。正则化方法的本质是在稳定性和精确性之间进行折中。
+Tikhonov 正则化并不是无条件提高精度的方法。它通过抑制小奇异值方向来降低噪声放大，但这些方向中也可能包含真实信号成分，因此正则化会引入偏差。设观测数据为 $\tilde b=Ax+\delta b$，且 $A=U\Sigma V^T$。在奇异向量基下，Tikhonov 解与真实解之间的误差可分解为：
+
+$$
+x_\lambda-x
+=
+\sum_i
+\left(\frac{\sigma_i^2}{\sigma_i^2+\lambda}-1\right)(v_i^Tx)v_i
++
+\sum_i
+\frac{\sigma_i}{\sigma_i^2+\lambda}(u_i^T\delta b)v_i.
+$$
+
+其中，第一项由正则化因子 $\sigma_i^2/(\sigma_i^2+\lambda)$ 偏离 1 引起，反映真实信号成分被压制后产生的偏差；第二项表示观测噪声经过 Tikhonov 解算子后的传播结果，反映正则化后的方差或扰动贡献。当 $\lambda$ 较小时，第一项较小，但第二项可能因小奇异值方向未被充分抑制而增大；当 $\lambda$ 较大时，第二项得到抑制，但第一项会增大。由此可见，正则化参数 $\lambda$ 的选择本质上是在偏差与稳定性之间进行折中。
 
 ### 9.3 图像实验的意义
 
