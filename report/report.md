@@ -345,41 +345,41 @@ $$
 
 #### 问题设定
 
-构造对角矩阵 \(A = \mathrm{diag}(\sigma_1,\sigma_2,\sigma_3,\sigma_4)\)，奇异值指数衰减：
+构造对角矩阵 $A = \mathrm{diag}(\sigma_1,\sigma_2,\sigma_3,\sigma_4)$，奇异值指数衰减：
 
-\[
+$$
 A = \mathrm{diag}(1,\;0.1,\;0.01,\;0.001),\qquad \kappa(A)=1000.
-\]
+$$
 
-真实解 \(x = [1,\;0.5,\;0.1,\;0.02]^{\mathsf{T}}\)，理想观测 \(b = Ax\)。添加噪声
+真实解 $x = [1,\;0.5,\;0.1,\;0.02]^{\mathsf{T}}$，理想观测 $b = Ax$。添加噪声
 
-\[
+$$
 \delta b = [0,\;0,\;0.0005,\;0.0005]^{\mathsf{T}},
-\]
+$$
 
-实际观测 \(\tilde b = b + \delta b\)。
+实际观测 $\tilde b = b + \delta b$。
 
 #### 伪逆恢复
 
-\[
+$$
 \hat x_{\text{pinv}} = A^{-1}\tilde b = [1,\;0.5,\;0.15,\;0.52]^{\mathsf{T}}
-\]
+$$
 
-误差集中在小奇异值方向（第3、4分量），相对误差达 **50%** 和 **2500%**，噪声被放大 \(1/\sigma_3=100\)、\(1/\sigma_4=1000\) 倍。
+误差集中在小奇异值方向（第3、4分量），相对误差达 **50%** 和 **2500%**，噪声被放大 $1/\sigma_3=100$、$1/\sigma_4=1000$ 倍。
 
 #### Tikhonov 正则化恢复
 
-取 \(\lambda = 10^{-5}\)，正则化解为
+取 $\lambda = 10^{-5}$，正则化解为
 
-\[
+$$
 \hat x_{\text{reg},i} = \frac{\sigma_i}{\sigma_i^2+\lambda}\,\tilde b_i.
-\]
+$$
 
 计算结果：
 
-\[
+$$
 \hat x_{\text{reg}} = [1,\;0.5,\;0.136,\;0.047]^{\mathsf{T}}
-\]
+$$
 
 第3、4分量的放大因子从 100、1000 降至约 90.9，噪声得到有效压制，相对误差降为 **36%** 和 **135%**。
 
@@ -388,7 +388,7 @@ A = \mathrm{diag}(1,\;0.1,\;0.01,\;0.001),\qquad \kappa(A)=1000.
 | 方法 | RMSE | 最大分量相对误差 |
 |------|------|------------------|
 | 伪逆 | 0.251 | 2500% |
-| Tikhonov (\(\lambda=10^{-5}\)) | **0.023** | 135% |
+| Tikhonov ($\lambda=10^{-5}$) | **0.023** | 135% |
 
 表中RMSE表示均方根误差，衡量的是预测值与真实值之间的平均误差大小。
 
@@ -473,7 +473,17 @@ $$
 \kappa(B\otimes B)=\kappa(B)^2
 $$
 
-证明如下：设 $B$ 的奇异值分解为 $B = U \Sigma V^T$，其中奇异值为 $\sigma_1 \ge \dots \ge \sigma_n$。根据 Kronecker 积的性质：$$(B \otimes B) = (U \Sigma V^T) \otimes (U \Sigma V^T) = (U \otimes U) (\Sigma \otimes \Sigma) (V^T \otimes V^T)$$因为 $U$ 和 $V$ 是正交矩阵，根据 Kronecker 积保持正交性的性质，$U \otimes U$ 和 $V \otimes V$ 也是正交矩阵。因此，$\Sigma \otimes \Sigma$ 就是 $B \otimes B$ 的奇异值矩阵。其最大奇异值为 $\sigma_1 \cdot \sigma_1 = \sigma_1^2$，最小奇异值为 $\sigma_n \cdot \sigma_n = \sigma_n^2$。从而证得：$$\kappa(B \otimes B) = \frac{\sigma_1^2}{\sigma_n^2} = \left(\frac{\sigma_1}{\sigma_n}\right)^2 = \kappa(B)^2$$
+证明如下：设 $B$ 的奇异值分解为 $B = U \Sigma V^T$，其中奇异值为 $\sigma_1 \ge \dots \ge \sigma_n$。根据 Kronecker 积的性质：
+
+$$
+(B \otimes B) = (U \Sigma V^T) \otimes (U \Sigma V^T) = (U \otimes U) (\Sigma \otimes \Sigma) (V^T \otimes V^T)
+$$
+
+因为 $U$ 和 $V$ 是正交矩阵，根据 Kronecker 积保持正交性的性质，$U \otimes U$ 和 $V \otimes V$ 也是正交矩阵。因此，$\Sigma \otimes \Sigma$ 就是 $B \otimes B$ 的奇异值矩阵。其最大奇异值为 $\sigma_1 \cdot \sigma_1 = \sigma_1^2$，最小奇异值为 $\sigma_n \cdot \sigma_n = \sigma_n^2$。从而证得：
+
+$$
+\kappa(B \otimes B) = \frac{\sigma_1^2}{\sigma_n^2} = \left(\frac{\sigma_1}{\sigma_n}\right)^2 = \kappa(B)^2
+$$
 
 这说明若 $B$ 已经病态，则二维向量化算子会更加病态。
 
